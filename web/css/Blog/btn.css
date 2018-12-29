@@ -1,0 +1,17 @@
+h2{
+    color: lightseagreen;
+}
+.col-md-6{
+    width: 29%;
+    border: black solid 1px;
+    border-radius: 10px;
+    margin: 10px;
+}
+.btn{
+
+}
+.btn-default:hover{
+    color: lightseagreen;
+    background-color: #798d8f;
+    border-color: lightseagreen;
+}

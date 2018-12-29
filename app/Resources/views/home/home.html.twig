@@ -1,0 +1,177 @@
+{% extends 'base.html.twig' %}
+
+ {% block stylesheets %}
+     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+     <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('css/Blog/home.css') }}">
+ {% endblock %}
+
+{% block header %}
+    <header>
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">DreamWeb</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user %}
+                            <li>
+                                <a href="{{ path('home_index') }}">
+                                    Начало
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('blog_index') }}">
+                                    Блог
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('my_article') }}">
+                                    Моите постове
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('list_all_users') }}">
+                                    Чат
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_profile') }}">
+                                    Профил
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('home_index') }}">
+                                    Начало
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('blog_index') }}">
+                                    Блог
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_register') }}">
+                                    Регистрация
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('security_login') }}">
+                                    Вход
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <img src="{{ asset('uploads/images/bg-image.jpg') }}">
+    </header>
+{% endblock %}
+
+{% block main %}
+    <div class="flex_column">
+        <article class="iconbox iconbox_top">
+            <div class="iconbox_content">
+                <header class="entry-content-header">
+                    <div class="iconbox_icon heading-color" aria-hidden="true" data-av_icon=""
+                         data-av_iconfont="entypo-fontello"></div>
+                    <h3 class="iconbox_content_title" itemprop="headline">Изработка на уебсайт от DreamWeb</h3>
+                </header>
+                <div class="iconbox_content_container " itemprop="text"><p style="text-align: center;">Искате ли да
+                        присъствате в интернет пространството? Има много начини за това – може да се регистрирате в
+                        социални мрежи, да бъдете активни във форуми, да си създадете блог и много други. Безспорно
+                        обаче, най-ефективният начин да представите себе си или вашата фирма и бранд в интернет, е чрез
+                        изработка на сайт, който да е атрактивен и функционален. Защо си заслужава да притежавате
+                        собствен уеб сайт в интернет?</p>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="flex_column av_one_half first  avia-builder-el-2  el_after_av_one_full  el_before_av_one_half  column-top-margin">
+        <article class="iconbox iconbox_top">
+            <div class="iconbox_content">
+                <header class="entry-content-header">
+                    <h3 class="iconbox_content_title"></h3>
+                </header>
+                <div class="iconbox_content_container " itemprop="text"><p style="text-align: center;">Професионално
+                        изработеният уеб сайт е вашето пространство в интернет, което ще изглежда така, както вие решите
+                        и ще представя по най-добрият начин облика ви в уеб пространството. Добре оптимизираният и
+                        поддържан уеб сайт ви предоставя неограничени възможности за развитие на вашия бизнес и идеи
+                        отвъд граници на държави.</p>
+                </div>
+            </div>
+            <footer class="entry-footer"></footer>
+        </article>
+    </div>
+    <div class="flex_column">
+        <article class="iconbox iconbox_top">
+            <div class="iconbox_content">
+                <header class="entry-content-header">
+                    <h3 class="iconbox_content_title"></h3>
+                </header>
+                <div class="iconbox_content_container " itemprop="text"><p style="text-align: center;"> Добре
+                        функциониращият уеб сайт ще бъде най-добрата ви връзка с вашите посетители, фенове и клиенти,
+                        както и с търсещите машини Google, Yahoo, Bing и други.<br> Може да притежавате уеб сайт на
+                        всякакви тематики, свързани с вашите хобита, интереси и професионални цели.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="iconbox_content">
+        <header class="entry-content-header">
+            <h3 class="iconbox_content_title" itemprop="headline">Защо да изберете - DreamWeb</h3>
+        </header>
+        <div class="iconbox_content_container " itemprop="text">
+
+            <div class="infobox-wrap" style="text-align: left;">
+
+                <h1 style="text-align: center;">Изработка на уеб сайт</h1>
+
+                <p>Професионално изработеният уеб сайт е уникален, атрактивен, SEO
+                    оптимизиран и изработен спрямо вашите специфични изисквания и съвременните тенденции в уеб дизайн,
+                    интернет маркетинг и оптимизация за търсещите машини. Предлагаме ви разнообразие от професионални
+                    услуги за изработка на сайт, с голямо разнообразие, според проектите, които ще ни възложите.</p>
+                <p>Ние сме сплотен и креативен екип от професионалисти, които успешно работят в сферата на уеб дизайн,
+                    интернет маркетинг и SEO оптимизация в продължение на повече
+                    от осем години и имаме на 400 успешни проекта. Реализираме всеки проект с много голямо внимание към
+                    детайлите спрямо това, от което се нуждаете за вашия личен уеб сайт или корпоративен уеб сайт за
+                    вашия бранд. Стараем се непрекъснато да се усъвършенстваме и да допълваме пакета от услуги, които
+                    предлагаме на нашите клиенти. Преди всеки проект ви осигуряваме професионална безплатна консултация
+                    за изграждането на желания от вас уеб сайт.</p>
+
+                <div class="iconbox_content_container ">
+                    <p>Изработваме уеб сайтове с &nbsp;уникален и&nbsp;атрактивен
+                        уеб дизайн и визия, SEO
+                        оптимизирани и с отлична функционалност. Възползвайте се от нашите услуги, за да изградите силно
+                        онлайн присъствие.</p>
+
+                    <div class="infobox-wrap">
+                        <h2>Изработка на сайт</h2>
+                        <p>– Корпоративен<br> – Информационен<br> – Статичен / Динамичен<br> – Блог<br> – Портфолио сайт<br>
+                            – Сайт визитка</p>
+                        <p>Изработка на модерен, функционален и атрактивен корпоративен сайт за вашия бранд.</p>
+                        <p>Изработка на сайт за промоции и презентации на продукти и услуги.</p>
+                        <p>Изработка на онлайн магазин</p>
+                        <p>Промяна на дизайна на вече съществуващ уеб сайт.</p>
+                        <p>Поддръжка на уеб сайт</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Blog/style.css') }}">
+{% endblock %}
+{% block body %}
+    <div class="container body-content">
+        <div class="row">
+            {% for article in pagination %}
+                <div class="col-md-6">
+                    <article>
+                        <header>
+                            <h2>{{ article.title }}</h2>
+                        </header>
+
+                        <a href="{{ path('article_view', {'id': article.id}) }}">
+                            <img src="{{ asset('uploads/images/' ~ article.image)}}" width=250 height="150"></a>
+
+                        <small class="author">
+                            {{ article.author.fullName }}
+                        </small>
+
+                        Views: {{ article.viewCount }}
+                        <div class="pull-right">
+                            <a class="btn btn-default btn-xs"
+                               href="{{ path('article_view', {'id': article.id}) }}">Read more &raquo;</a>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if app.user %}
+        <div class="form-group">
+            <div class="btn-article">
+                <a class="btn btn-articleSet" href="{{ path('article_create') }}">Нов пост</a>
+            </div>
+        </div>
+    {% endif %}
+
+    {# display navigation #}
+    <div class="navigation text-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+
+{% endblock %}

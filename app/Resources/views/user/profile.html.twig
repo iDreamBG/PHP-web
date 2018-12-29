@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Blog/profile.css') }}">
+    <script>
+        setTimeout(function () {
+            $('#msg').fadeOut();
+        }, 3000)
+
+    </script>
+{% endblock %}
+
+{% block main %}
+    <img src="{{asset('uploads/images/' ~ user.image)}}" width="150" height="150">
+    <a href="{{ path('user_mailbox') }}">
+        <span class="glyphicon glyphicon-envelope" style="font-size: xx-large">({{ countMsg }})</span>
+    </a>
+    <a href="{{ path('profile_edit') }}">Редактирай</a>
+    <br><hr>
+    <h3> Здравей {{ user.fullName }}</h3>
+
+{% endblock %}
+

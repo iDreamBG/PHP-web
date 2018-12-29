@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+{% block main %}
+
+
+    <a href="{{ path('user_mailbox') }}">
+        <span class="glyphicon glyphicon-envelope" style="font-size: xx-large"></span>({{ countMsg }})</a><br><br>
+    <hr>
+
+    <h2>My friends</h2><br>
+    {% for user in allUsers %}
+        <a href="{{ path('user_message', {'id': user.id }) }}">{{ user.email }}</a>
+        <hr />
+    {% endfor %}
+
+{% endblock %}

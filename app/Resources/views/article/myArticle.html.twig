@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Blog/style.css') }}">
+{% endblock %}
+{% block body %}
+
+    <div class="container body-content">
+        <div class="row">
+            {% for article in articles %}
+                <div class="col-md-12">
+                    <article >
+                        <header>
+                            <h2>{{ article.title }}</h2>
+                        </header>
+
+                        <p>
+                              {{ article.content }}
+                        </p>
+                        <img src="{{ asset('uploads/images/' ~ article.image) }}" width="400" height="200">
+                        <div class="pull-right">
+                            <a class="btn btn-danger btn-xs" href="{{ path('article_delete', {'id': article.id} ) }}">delete
+                                &raquo;</a>
+                            <a class="btn btn-success btn-xs" href="{{ path('article_edit', {'id': article.id} ) }}">edit
+                                &raquo;</a>
+                        </div>
+                    </article><br><h1></h1>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,158 @@
+{#
+   This is the base template used as the application layout which contains the
+   common elements and decorates all the other templates.
+   See http://symfony.com/doc/current/book/templating.html#template-inheritance-and-layouts
+#}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>{% block title %}DreamWeb{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
+        <script>
+            setTimeout(function () {
+                $('#msg').fadeOut();
+            }, 3000)
+
+        </script>
+    {% endblock %}
+
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('js/moment.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.js') }}"></script>
+        <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
+    {% endblock %}
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+
+<body id="{% block body_id %}{% endblock %}">
+
+{% block hh1 %}
+{% endblock %}
+
+{% block header %}
+    <header>
+        <div class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="/" class="navbar-brand">DreamWeb</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user %}
+                            <li>
+                                <a href="{{ path('home_index') }}">
+                                    Начало
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('blog_index') }}">
+                                    Блог
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('my_article') }}">
+                                    Моите постове
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('list_all_users') }}">
+                                    Чат
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_profile') }}">
+                                    Профил
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('home_index') }}">
+                                    Начало
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('blog_index') }}">
+                                    Блог
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('user_register') }}">
+                                    Регистрация
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('security_login') }}">
+                                    Вход
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+<div class="container body-container">
+    {% block body %}
+        <div class="row">
+            <div id="main" class="col-sm-9">
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+    {% endblock %}
+</div>
+
+{% block footer %}
+    <footer>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                {% if app.user %}
+                    <li style="color: white">
+                        <a href="{{ path('home_index') }}">
+                            Начало
+                        </a>
+                    </li>
+                    <li style="color: white">
+                        <a href="{{ path('user_profile') }}">
+                            Профил
+                        </a>
+                    </li>
+                    <li style="color: white">
+                        <a href="{{ path('blog_index') }}">
+                            Блог
+                        </a>
+                    </li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li style="color: white">
+                            <a href="{{ path('all_users') }}">
+                                Admin Panel
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li style="color: white">
+                        <a href="{{ path('security_logout') }}">
+                            Изход
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </footer>
+{% endblock %}
+
+
+</body>
+</html>

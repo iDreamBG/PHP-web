@@ -1,0 +1,10 @@
+h2{
+    color: lightseagreen;
+}
+.col-md-6{
+    align-content: center;
+    width: 30%;
+    border: black solid 1px;
+    border-radius: 10px;
+    margin: 10px;
+}
