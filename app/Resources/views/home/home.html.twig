@@ -77,11 +77,16 @@
 {% endblock %}
 
 {% block main %}
+    <h3>Добре дошли в DreamWeb.Ние предлагаме както професионална изработка на уеб сайтове така и
+        <a href="{{ path('blog_index') }}">Блог</a> в който можете да качвате вашите статии
+        и една социална мрежа в която можете да намерите приятели, но за да ги ползвате първо се
+        <a href="{{ path('user_register') }}">регистрирайте</a>.
+    </h3>
     <div class="flex_column">
         <article class="iconbox iconbox_top">
             <div class="iconbox_content">
                 <header>
-                    <h3>Изработка на уебсайт от DreamWeb</h3>
+                    <h5>Изработка на уебсайт от DreamWeb</h5>
                 </header>
                 <div>
                     <p>Искате ли да

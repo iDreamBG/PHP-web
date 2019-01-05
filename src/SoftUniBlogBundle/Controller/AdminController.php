@@ -43,4 +43,5 @@ class AdminController extends Controller
         return $this->render('admin/user_profile.html.twig',
             ['user' => $user]);
     }
+
 }

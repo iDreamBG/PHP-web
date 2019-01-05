@@ -105,9 +105,43 @@ class UserController extends Controller
             $em->persist($currentUser);
             $em->flush();
 
-            return $this->redirectToRoute("user_profile");
+            return $this->redirectToRoute("home_index");
         }
         return $this->render('user/edit.html.twig',
+            ['form' => $form->createView(),
+                'currentUser' => $currentUser]);
+    }
+
+
+    /**
+     * @Route("/profile/delete/{id}", name="profile_delete")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function deleteAction(Request $request, $id)
+    {
+        $currentUser = $this
+            ->getDoctrine()
+            ->getRepository(User::class)
+            ->find($id);
+
+        if ($currentUser === null) {
+            return $this->redirectToRoute("home_index");
+        }
+
+        $form = $this->createForm(UserType::class, $currentUser);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($currentUser);
+            $em->flush();
+
+            return $this->redirectToRoute("home_index");
+        }
+        return $this->render('user/delete.html.twig',
             ['form' => $form->createView(),
                 'currentUser' => $currentUser]);
     }

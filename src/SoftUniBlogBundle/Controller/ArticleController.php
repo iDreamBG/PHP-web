@@ -37,7 +37,7 @@ class ArticleController extends Controller
                     $fileName);
                 $article->setImage($fileName);
             }else{
-                $defName= "proba";
+                $defName= "images.png";
                 $article->setImage($defName);
             }
 
