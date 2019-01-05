@@ -27,6 +27,20 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if($form->isSubmitted()){
+
+            /** @var UploadedFile $file */
+            $file = $form->getData()->getImage();
+            if($file != null) {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('article_directory'),
+                    $fileName);
+                $user->setImage($fileName);
+            }else{
+                $defName= "user_profile.png";
+                $user->setImage($defName);
+            }
+
+
             $password = $this
                 ->get('security.password_encoder')
                 ->encodePassword($user, $user->getPassword());
@@ -50,6 +64,54 @@ class UserController extends Controller
         return $this->render('user/register.html.twig', ['form' =>$form->createView()]);
     }
 
+
+    /**
+     * @Route("/profile/edit/{id}", name="profile_edit")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editAction(Request $request, $id)
+    {
+
+        $currentUser = $this
+            ->getDoctrine()
+            ->getRepository(User::class)
+            ->find($id);
+
+        if ($currentUser === null) {
+            return $this->redirectToRoute("home_index");
+        }
+
+        $form = $this->createForm(UserType::class, $currentUser);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            /** @var UploadedFile $file */
+            $file = $form->getData()->getImage();
+            if($file != null) {
+                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+                $file->move($this->getParameter('article_directory'),
+                    $fileName);
+                $currentUser->setImage($fileName);
+            }else{
+                $defName= "user_profile.png";
+                $currentUser->setImage($defName);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($currentUser);
+            $em->flush();
+
+            return $this->redirectToRoute("user_profile");
+        }
+        return $this->render('user/edit.html.twig',
+            ['form' => $form->createView(),
+                'currentUser' => $currentUser]);
+    }
+
     /**
      * @Route("/profile", name="user_profile")
      */
@@ -70,52 +132,6 @@ class UserController extends Controller
         $countMsg = count($unreadMessages);
 
         return $this->render("user/profile.html.twig", ['user' => $user, 'countMsg' => $countMsg]);
-    }
-
-    /**
-     * @Route("/profile/edit", name="profile_edit")
-     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function editAction(Request $request)
-    {
-        $userId = $this->getUser()->getId();
-
-        $currentUser = $this
-            ->getDoctrine()
-            ->getRepository(User::class)
-            ->find($userId);
-
-        if ($currentUser === null) {
-            return $this->redirectToRoute("home_index");
-        }
-
-        $form = $this->createForm(User::class, $currentUser);
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            /** @var UploadedFile $file */
-            $file = $form->getData()->getImage();
-            if($file != null) {
-                $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-                $file->move($this->getParameter('article_directory'),
-                    $fileName);
-                $currentUser->setImage($fileName);
-            }else{
-                $defName= "user_profile.png";
-                $currentUser->setImage($defName);
-            }
-            $currentUser = $this->getUser();
-            $em = $this->getDoctrine()->getManager();
-            $em->merge($currentUser);
-            $em->flush();
-
-            return $this->redirectToRoute("user_profile");
-        }
-        return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'currentUser' => $currentUser]);
     }
 
 }

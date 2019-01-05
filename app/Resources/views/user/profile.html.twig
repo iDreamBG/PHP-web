@@ -16,7 +16,7 @@
     <a href="{{ path('user_mailbox') }}">
         <span class="glyphicon glyphicon-envelope" style="font-size: xx-large">({{ countMsg }})</span>
     </a>
-    <a href="{{ path('profile_edit') }}">Редактирай</a>
+    <a href="{{ path('profile_edit', {'id': user.id} ) }}">Редактирай</a>
     <br><hr>
     <h3> Здравей {{ user.fullName }}</h3>
 

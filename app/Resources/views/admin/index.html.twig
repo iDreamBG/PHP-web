@@ -5,8 +5,12 @@
 
     {% for user in allUsers %}
         <a href="{{ path('admin_user_profile', {'id': user.id }) }}">{{ user.email }}</a>
+
         <span style="float: right; color: red">Изтрий</span>
+
+        <a href="{{ path('profile_edit', {'id': user.id }) }}">
         <span style="float: right; color: green; padding-right: 6px;">Редактирай</span>
+        </a>
         <hr />
     {% endfor %}
 

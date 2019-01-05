@@ -4,34 +4,41 @@
     <div class="container body-content span=8 offset=2">
         <div class="well">
             <form class="form-horizontal" enctype="multipart/form-data"
-                  action="{{ path('profile_edit', {id: currentUser.id}) }}" method="POST">
+                  action="{{ path('profile_edit', {'id': currentUser.id}) }}" method="POST">
                 <fieldset>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="currentUser">Емайл</label>
+                        <label class="col-sm-4 control-label" for="user_email">Емайл</label>
                         <div class="col-sm-4 ">
-                            <input type="text" class="form-control" id="currentUser_email" placeholder="Email"
-                                   name="currentUser[email]" value="{{ currentUser.email }}">
+                            <input type="text" class="form-control" id="user_email" placeholder="Email"
+                                   name="user[email]" value="{{ currentUser.email }}">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="currentUser_fullName">Име</label>
+                        <label class="col-sm-4 control-label" for="user_fullName">Име</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="currentUser_fullName" placeholder="Full Name"
-                                   name="currentUser[fullName]" value="{{ currentUser.fullName }}">
+                            <input type="text" class="form-control" id="user_fullName" placeholder="Full Name"
+                                   name="user[fullName]" value="{{ currentUser.fullName }}">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="currentUser_image">Снимка</label>
-                        <div class="col-sm-4 ">
-                            <input type="file" class="form-control" id="currentUser_image" placeholder="Image"
-                                   name="currentUser[image]">
+                        <label class="col-sm-4 control-label" for="user_password">Парола</label>
+                        <div class="col-sm-4">
+                            <input type="password" class="form-control" id="user_password" placeholder="Password"
+                                   name="user[password]" value="{{ currentUser.password }}">
                         </div>
                     </div>
 
-                    {{ form_row(form._token) }}
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_image">Снимка</label>
+                        <div class="col-sm-4 ">
+                            <input type="file" class="form-control" id="user_image" placeholder="Image"
+                                   name="user[image]" value="{{ currentUser.image }}">
+                        </div>
+                    </div>
+
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
@@ -39,6 +46,8 @@
                             <button type="submit" class="btn btn-success">Промени</button>
                         </div>
                     </div>
+                    {{ form_row(form._token) }}
+
                 </fieldset>
             </form>
         </div>

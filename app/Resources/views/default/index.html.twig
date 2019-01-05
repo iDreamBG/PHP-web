@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Blog/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Blog/center.css') }}"
 {% endblock %}
 {% block body %}
     <div class="container body-content">
@@ -14,8 +15,10 @@
                             <h2>{{ article.title }}</h2>
                         </header>
 
-                        <a href="{{ path('article_view', {'id': article.id}) }}">
-                            <img src="{{ asset('uploads/images/' ~ article.image)}}" width=250 height="150"></a>
+                        {% if article.image %}
+                            <a href="{{ path('article_view', {'id': article.id}) }}">
+                            <img src="{{ asset('uploads/images/' ~ article.image)}}" width=318 height="180"></a>
+                            {% endif %}
 
                         <small class="author">
                             {{ article.author.fullName }}

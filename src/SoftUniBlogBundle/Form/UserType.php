@@ -28,7 +28,7 @@ class UserType extends AbstractType
             ])
             ->add('fullName', TextType::class)
             ->add('image', FileType::class,
-                ['data' => null]);;
+                ['data' => null]);
     }/**
      * {@inheritdoc}
      */
